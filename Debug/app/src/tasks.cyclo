@@ -1,0 +1,4 @@
+../app/src/tasks.c:5:6:vTaskSendCardboard	1
+../app/src/tasks.c:11:6:vTaskOpenPalletizer	1
+../app/src/tasks.c:17:6:vTaskPublisher	1
+../app/src/tasks.c:23:6:vTaskWrite	1
