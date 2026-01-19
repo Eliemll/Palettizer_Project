@@ -14,10 +14,19 @@ L'architecture logicielle est optimisée pour une faible empreinte mémoire tout
 * **RAM :** 8 Ko utilisés sur 16 Ko disponibles.
 * **Flash :** Occupation maîtrisée sur le STM32F072RB.
 
+<img width="893" height="179" alt="Screenshot from 2026-01-16 17-13-13" src="https://github.com/user-attachments/assets/d2cc35db-445f-42d8-871b-32c02e9d56ad" />
+
+
 ### Analyse Temps-Réel & Charge CPU
 Grâce au modèle **Publisher/Subscriber**, la charge CPU applicative est quasi nulle en l'absence d'événements physiques.
-* **Déterminisme :** Les tâches métier sont bloquées via des sémaphores et notifications FreeRTOS.
-* **Diagnostic :** Validation des choix techniques via TraceAlyzer.
+
+#### Chronogramme des tâches (TraceAlyzer)
+<img width="900" alt="Chronogramme TraceAlyzer" src="Lien_Image_1" />
+*Le chronogramme montre le déterminisme des tâches et l'absence de préemption inutile.*
+
+#### Graphique de charge CPU
+<img width="900" alt="Charge CPU" src="Lien_Image_2" />
+*On observe une charge processeur inférieure à 0.05% en régime stationnaire.*
 
 ## Architecture du Logiciel
 Le projet suit une séparation stricte des responsabilités :
