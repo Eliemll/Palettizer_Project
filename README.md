@@ -21,11 +21,11 @@ L'architecture logicielle est optimisée pour une faible empreinte mémoire tout
 Grâce au modèle **Publisher/Subscriber**, la charge CPU applicative est quasi nulle en l'absence d'événements physiques.
 
 #### Chronogramme des tâches (TraceAlyzer)
-<img width="900" alt="Chronogramme TraceAlyzer" src="Lien_Image_1" />
+<img width="900" alt="Chronogramme TraceAlyzer" src="[Lien_Image_1](https://github.com/user-attachments/assets/2d0d9b9a-a72c-4852-bf87-1fb2719177ed)" />
 *Le chronogramme montre le déterminisme des tâches et l'absence de préemption inutile.*
 
 #### Graphique de charge CPU
-<img width="900" alt="Charge CPU" src="Lien_Image_2" />
+<img width="900" alt="Charge CPU" src="[Lien_Image_2](https://github.com/user-attachments/assets/f4c4a1a5-bdaa-40ea-a449-09db80895d40)" />
 *On observe une charge processeur inférieure à 0.05% en régime stationnaire.*
 
 ## Architecture du Logiciel
