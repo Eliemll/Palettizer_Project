@@ -2,6 +2,11 @@
 
 Ce projet implémente le système de contrôle d'un palettiseur industriel automatisé. Le micrologiciel est conçu pour un microcontrôleur **STM32F072RB** et interagit avec un jumeau numérique sur **Factory IO**.
 
+## Démonstration
+<video src="https://github.com/user-attachments/assets/bd209643-b508-41a8-8427-e25452aefa10" controls="controls" style="max-width: 100%;">
+  Votre navigateur ne supporte pas la lecture de vidéos.
+</video>
+
 ## Points Forts & Optimisations
 
 ### Efficacité Énergétique (-70%)
@@ -34,11 +39,6 @@ Le projet suit une séparation stricte des responsabilités :
 * `app/src/myTasks.c` : Machine à états (FSM) gérant le cycle de palettisation.
 * `app/src/subscription.c` : Gestionnaire d'événements assurant la robustesse et la modularité.
 * `bsp/src/factory_io.c` : Couche d'abstraction matérielle (HAL) pour l'interface de communication.
-
-## Démonstration
-<video src="https://github.com/user-attachments/assets/bd209643-b508-41a8-8427-e25452aefa10" controls="controls" style="max-width: 100%;">
-  Votre navigateur ne supporte pas la lecture de vidéos.
-</video>
 
 ## Stack Technologique
 * **Hardware :** STM32F072RB (Cortex-M0).
