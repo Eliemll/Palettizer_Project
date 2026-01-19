@@ -1,3 +1,0 @@
-../bsp/src/factory_io.c:17:6:FACTORY_IO_Actuators_Set	24	static
-../bsp/src/factory_io.c:46:9:FACTORY_IO_Sensors_Get	24	static
-../bsp/src/factory_io.c:75:6:FACTORY_IO_update	16	static

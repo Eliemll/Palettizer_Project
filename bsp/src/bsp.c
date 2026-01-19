@@ -138,7 +138,7 @@ void BSP_Console_Init()
 	USART2->CR3 = 0x00000000;
 
 	// Select PCLK (APB1) as clock source
-	// PCLK -> 48 MHz
+	// PCLK -> 8 MHz
 	RCC->CFGR3 &= ~RCC_CFGR3_USART2SW_Msk;
 
 	// Baud Rate = 115200
@@ -149,7 +149,7 @@ void BSP_Console_Init()
 	// BRR = 833 -> Actual BaudRate = 115246.0984 -> 0.04% error (better choice)
 
 	USART2->CR1 |= USART_CR1_OVER8;
-	USART2->BRR = 833;
+	USART2->BRR = 139;
 
 	// Enable both Transmitter and Receiver
 	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE;

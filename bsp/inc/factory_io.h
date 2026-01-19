@@ -18,48 +18,80 @@
 #define TAG_UPDATE			0xA3
 
 // ACTUATORS
-#define SendCardboard_Msk                   0b1
-#define ActivateConveyor1_Msk               (0b1<<1)
-#define BlockPalletizeEntry_Msk             (0b1<<2)
+// 0b1<<7 doesnt correspond to anything.
+// To reach the 7th Sensor you have to write 0b1<<8
+#define Test_Msk 							 0b1<<16
+
+#define SendCardboard_Msk                   (0b1)
+#define ActivateFirstConveyor_Msk           (0b1<<1)
+#define BlockPalletizerEntry_Msk            (0b1<<2)
+#define OpenDoor_Msk                        (0b1<<3)
+#define Pusher_Msk                          (0b1<<4)
+#define Clamp_Msk                           (0b1<<5)
+#define LiftUpElevator_Msk                  (0b1<<6)
+// This line has no effects                 (0b1<<7)
+#define LiftDownElevator_Msk                (0b1<<8)
+#define ElevatorToLimit_Msk                 (0b1<<9)
+#define SendPalette_Msk                     (0b1<<10)
+#define LoadPalette_Msk                     (0b1<<11)
 #define ActivateConveyor2_Msk               (0b1<<12)
+#define TurnCardboard_Msk                   (0b1<<13)
+// This line either doesn't do anything     (0b1 << 14)
+#define UnloadPalettizer_Msk                (0b1<<15)
+#define LoadPalettizer_Msk                  (0b1<<16)
+#define UnloadPalette_Msk                   (0b1<<17)
+#define ActivateSecondPaletteConveyor_Msk   (0b1<<18)
+#define ActivateFisrtPaletteConveyor_Msk    (0b1<<19)
+#define ActivatePaletteOutConveyor_Msk      (0b1<<20)
+#define RemovePalette_Msk                   (0b1<<21)
 
 // SENSORS
-#define CardboardSent_Msk                   0b1 
+#define CardoboardDistibuted_Msk             0b1
+#define CardboardSent_Msk                   (0b1<<1)
 #define CardboardArrivedToPalletizer_Msk    (0b1<<2)
+#define DoorOpenred_Msk                     (0b1<<3)
+#define PushLimit_Msk                       (0b1<<4) 
+#define CardBoardsClamped_Msk               (0b1<<5)
+#define ElevatorIsDown_Msk                  (0b1<<6)
+// This line has no effects                 (0b1<<7)
+#define ElevatorIsAtFirstStage_Msk          (0b1<<8)
+#define ElevatorIsAtSecondStage_Msk         (0b1<<9)
+#define PaletteIsOut_Msk                    (0b1<<10)
+#define DoorLimit_Msk                       (0b1<<11)
+#define ElevatorIsMooving_Msk               (0b1<<12)
+#define PaletteIn_Msk                       (0b1<<13)
 
+    /*
+     * Global variables
+     */
 
-/*
- * Global variables
- */
+    /*
+     * Receiving buffer from Factory I/O Python bridge
+     *
+     * Works with DMA in circular mode, therefore nothing special has to be done
+     * to retrieve latest states. One should simply read the content of rx_dma_buffer[]
+     *
+     * 7 bytes for sensors
+     * [0]  -> 0xA8	Sensors tag
+     * [1]  -> 7-bit data byte #1 [  0 ->  6 ]
+     * [2]  -> 7-bit data byte #2 [  7 -> 13 ]
+     * [3]  -> 7-bit data byte #3 [ 14 -> 20 ]
+     * [4]  -> 7-bit data byte #4 [ 21 -> 27 ]
+     * [5]  -> CRC
+     * [6]  -> '\n'
+     *
+     * 7 bytes for Actuators
+     * [7]  -> 0xAD	Actuators tag
+     * [8]  -> 7-bit data byte #1 [  0 ->  6 ]
+     * [9]  -> 7-bit data byte #2 [  7 -> 13 ]
+     * [10] -> 7-bit data byte #3 [ 14 -> 20 ]
+     * [11] -> 7-bit data byte #4 [ 21 -> 27 ]
+     * [12] -> CRC
+     * [13] -> '\n'
+     *
+     */
 
-
-/*
- * Receiving buffer from Factory I/O Python bridge
- *
- * Works with DMA in circular mode, therefore nothing special has to be done
- * to retrieve latest states. One should simply read the content of rx_dma_buffer[]
- *
- * 7 bytes for sensors
- * [0]  -> 0xA8	Sensors tag
- * [1]  -> 7-bit data byte #1 [  0 ->  6 ]
- * [2]  -> 7-bit data byte #2 [  7 -> 13 ]
- * [3]  -> 7-bit data byte #3 [ 14 -> 20 ]
- * [4]  -> 7-bit data byte #4 [ 21 -> 27 ]
- * [5]  -> CRC
- * [6]  -> '\n'
- *
- * 7 bytes for Actuators
- * [7]  -> 0xAD	Actuators tag
- * [8]  -> 7-bit data byte #1 [  0 ->  6 ]
- * [9]  -> 7-bit data byte #2 [  7 -> 13 ]
- * [10] -> 7-bit data byte #3 [ 14 -> 20 ]
- * [11] -> 7-bit data byte #4 [ 21 -> 27 ]
- * [12] -> CRC
- * [13] -> '\n'
- *
- */
-
-extern uint8_t rx_dma_buffer[FRAME_LENGTH];
+    extern uint8_t rx_dma_buffer[FRAME_LENGTH];
 
 
 /*

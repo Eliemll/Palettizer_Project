@@ -1,20 +1,29 @@
-/*
- * main.h
- *
- *  Created on: 16 ao�t 2018
- *      Author: Laurent
- */
-
 #ifndef APP_INC_MAIN_H_
 #define APP_INC_MAIN_H_
 
+// Device header
 #include "stm32f0xx.h"
-#include "main.h"
+
+// BSP functions
 #include "bsp.h"
-#include "factory_io.h"
 #include "delay.h"
+
+// FreeRTOS headers
 #include "FreeRTOSConfig.h"
-// #include "tasks.c"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
+#include "queue.h"
+#include "event_groups.h"
+#include "stream_buffer.h"
+
+// FactoryIO header
+#include "factory_io.h"
+
+// Tasks
+#include "myTasks.h"
+#include "subscription.h"
 
 /* Global functions */
 

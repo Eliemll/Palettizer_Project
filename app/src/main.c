@@ -2,78 +2,24 @@
 
 static uint8_t 	SystemClock_Config	(void);
 
-uint32_t command = 0x0;
-
-int main(void)
+int main()
 {
-	// Configure System Clock for 48MHz from 8MHz HSE
-	SystemClock_Config();
-
-	// Initialize LED and USER Button
-	BSP_LED_Init();
+	// SystemClock_Config(); // Pas utilisé pour avoir 8MHz de Clock
 	BSP_PB_Init();
-
-	// Initialize Debug Console
+	BSP_LED_Init();
 	BSP_Console_Init();
-	my_printf("\r\nConsole Ready!\r\n");
-	my_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
 
-	// Read all states from the scene
-	FACTORY_IO_update();
+	// Wait until user press the button
+	while (BSP_PB_GetState() == 0) {}
 
-	// Send cardboard
-	my_printf("Starting Conveyors\r\n");
-	command |= ActivateConveyor1_Msk;
-	command |= ActivateConveyor2_Msk;
-	command |= BlockPalletizeEntry_Msk;
-	FACTORY_IO_Actuators_Set(command);
+	InitTasks();
 
-	// Wait here for user button
-	while(BSP_PB_GetState() == 0);
+	vTaskStartScheduler();
 
-	// Send cardboard
-	my_printf("Dropping a cardboard\r\n");
-	command |= SendCardboard_Msk;
-	FACTORY_IO_Actuators_Set(command);
-	BSP_DELAY_ms(500);
-	command &= ~SendCardboard_Msk;
-	FACTORY_IO_Actuators_Set(command);
-
-	// Wait for sensor S[1] = 0 (optical barrier)
-	my_printf("Waiting for sensor...\r\n");
-	while (FACTORY_IO_Sensors_Get(CardboardArrivedToPalletizer_Msk) == 1);
-
-	// Send cardboard
-	my_printf("Dropping a cardboard\r\n");
-	command |= SendCardboard_Msk;
-	FACTORY_IO_Actuators_Set(command);
-	BSP_DELAY_ms(500);
-	command &= ~SendCardboard_Msk;
-	FACTORY_IO_Actuators_Set(command);
-
-	BSP_DELAY_ms(1000);
-
-	// Wait for sensor S[1] = 0 (optical barrier)
-	my_printf("Waiting for sensor...\r\n");
-	while (FACTORY_IO_Sensors_Get(CardboardArrivedToPalletizer_Msk) == 1);
-
-	my_printf("Stop!\r\n");
-	command &= ~BlockPalletizeEntry_Msk;
-	FACTORY_IO_Actuators_Set(command);
-	BSP_DELAY_ms(200);
-
-	// Loop forever
-	while(1)
-	{
-		// LED blinking
-		BSP_LED_Toggle();
-		delay_ms(100);
-	}
+	while(1) {}
 }
 
-
-
-/*
+/*static
  * 	Clock configuration for the Nucleo STM32F072RB board
  * 	HSE input Bypass Mode 			-> 8MHz
  * 	SYSCLK, AHB, APB1 				-> 48MHz
@@ -176,4 +122,18 @@ static uint8_t SystemClock_Config()
 	// Update SystemCoreClock global variable
 	SystemCoreClockUpdate();
 	return (0);
+}
+
+void vAssertCalled(char *file, int  line)
+{
+    taskDISABLE_INTERRUPTS();
+
+    for( ;; );
+}
+
+void vApplicationMallocFailedHook( void )
+{
+    taskDISABLE_INTERRUPTS();
+
+    for( ;; );
 }

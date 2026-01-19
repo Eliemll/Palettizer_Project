@@ -42,7 +42,7 @@ extern uint32_t	SystemCoreClock;
 #define configTICK_RATE_HZ                      	( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                    	5
 #define configMINIMAL_STACK_SIZE                	( ( uint16_t ) 128 )
-#define configMAX_TASK_NAME_LEN                 	16
+#define configMAX_TASK_NAME_LEN                 	20
 #define configUSE_16_BIT_TICKS                  	0
 #define configIDLE_SHOULD_YIELD                 	1
 #define configUSE_TASK_NOTIFICATIONS            	1
@@ -62,22 +62,22 @@ extern uint32_t	SystemCoreClock;
 #define configSUPPORT_STATIC_ALLOCATION             0
 #define configSUPPORT_DYNAMIC_ALLOCATION            1
 #define configKERNEL_PROVIDED_STATIC_MEMORY         0
-#define configTOTAL_HEAP_SIZE                       ( ( size_t ) 6 * 1024 )
+#define configTOTAL_HEAP_SIZE                       ( ( size_t ) 7 * 1024 )
 #define configAPPLICATION_ALLOCATED_HEAP            0
 #define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP   0
 #define configENABLE_HEAP_PROTECTOR                 0
 
 /* Hook function related definitions. */
-#define configUSE_IDLE_HOOK                     	0
+#define configUSE_IDLE_HOOK                     	1
 #define configUSE_TICK_HOOK                     	0
 #define configCHECK_FOR_STACK_OVERFLOW          	0
-#define configUSE_MALLOC_FAILED_HOOK            	1	// <- Check this definition
+#define configUSE_MALLOC_FAILED_HOOK            	1
 #define configUSE_DAEMON_TASK_STARTUP_HOOK      	0
-#define configUSE_SB_COMPLETED_CALLBACK         	0
+#define configUSE_SB_COMPLETED_CALLBACK 0
 
 /* Run time and task stats gathering related definitions. */
-#define configGENERATE_RUN_TIME_STATS           	0
-#define configUSE_TRACE_FACILITY                	1	// <- Check this to enable TRACING
+#define configGENERATE_RUN_TIME_STATS               0
+#define configUSE_TRACE_FACILITY                	0
 #define configUSE_STATS_FORMATTING_FUNCTIONS    	0
 
 /* Co-routine related definitions. */
@@ -94,9 +94,9 @@ extern uint32_t	SystemCoreClock;
 #define configMAX_API_CALL_INTERRUPT_PRIORITY   	5
 
 /* Define to trap errors during development. */
-void vAssertCalled(char *file, int  line);
-// #define configASSERT(x) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
-#define configASSERT(x) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
+// void vAssertCalled(char *file, int  line);
+#define configASSERT(x) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
+// #define configASSERT(x) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )
 
 
 /* Optional functions - most linkers will remove unused functions anyway. */
@@ -124,9 +124,9 @@ void vAssertCalled(char *file, int  line);
 // * Definitions that map the FreeRTOS port interrupt handlers
 // * to their CMSIS standard names
 // */
-//#define vPortSVCHandler                             SVC_Handler
-//#define xPortPendSVHandler                          PendSV_Handler
-//#define xPortSysTickHandler                         SysTick_Handler
+#define vPortSVCHandler                             SVC_Handler
+#define xPortPendSVHandler                          PendSV_Handler
+#define xPortSysTickHandler                         SysTick_Handler
 
 
 /* A header file that defines trace macro can be included here. */

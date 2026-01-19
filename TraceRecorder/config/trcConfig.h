@@ -147,7 +147,7 @@ extern "C" {
  * In snapshot mode, the TzCtrl task is only used for stack monitoring and is
  * not created unless this is enabled.
  */
-#define TRC_CFG_ENABLE_STACK_MONITOR 0
+#define TRC_CFG_ENABLE_STACK_MONITOR 1
 
 /**
  * @def TRC_CFG_STACK_MONITOR_MAX_TASKS
@@ -217,7 +217,7 @@ extern "C" {
  * @brief The stack size of the Tracealyzer Control (TzCtrl) task.
  * See TRC_CFG_CTRL_TASK_PRIORITY for further information about TzCtrl.
  */
-#define TRC_CFG_CTRL_TASK_STACK_SIZE 1024
+#define TRC_CFG_CTRL_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
 
 /**
  * @def TRC_CFG_RECORDER_BUFFER_ALLOCATION
