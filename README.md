@@ -21,3 +21,6 @@ Le projet est structuré pour répondre aux standards industriels :
 * **Outils :** STM32CubeIDE, Factory IO (Simulation).
 
 ## Démonstration
+
+https://github.com/user-attachments/assets/bd209643-b508-41a8-8427-e25452aefa10
+
